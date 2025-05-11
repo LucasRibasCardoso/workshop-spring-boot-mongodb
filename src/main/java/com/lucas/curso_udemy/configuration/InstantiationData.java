@@ -2,6 +2,7 @@ package com.lucas.curso_udemy.configuration;
 
 import com.lucas.curso_udemy.domain.Post;
 import com.lucas.curso_udemy.domain.User;
+import com.lucas.curso_udemy.dto.AuthorDTO;
 import com.lucas.curso_udemy.repository.PostRepostory;
 import com.lucas.curso_udemy.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -34,10 +35,11 @@ public class InstantiationData implements CommandLineRunner {
         User alex = new User(null, "Alex Green", "alex@gmail.com");
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para São Paulo. Abraços!", maria);
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Acordei feliz hoje!", "Tenha um ótimo dia!", maria);
-
         userRepository.saveAll(List.of(maria, alex, bob));
+
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Acordei feliz hoje!", "Tenha um ótimo dia!", new AuthorDTO(maria));
+
         postRepostory.saveAll(List.of(post1, post2));
     }
 }
