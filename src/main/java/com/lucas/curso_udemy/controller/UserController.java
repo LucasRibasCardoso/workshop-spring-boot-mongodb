@@ -1,5 +1,6 @@
 package com.lucas.curso_udemy.controller;
 
+import com.lucas.curso_udemy.domain.Post;
 import com.lucas.curso_udemy.domain.User;
 import com.lucas.curso_udemy.dto.UserDTO;
 import com.lucas.curso_udemy.service.UserService;
@@ -61,5 +62,11 @@ public class UserController {
         user.setId(id); // Garante que o ID enviado no path seja o mesmo do usuario
         user = userService.update(user);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
