@@ -1,6 +1,7 @@
 package com.lucas.curso_udemy.service;
 
 import com.lucas.curso_udemy.domain.User;
+import com.lucas.curso_udemy.dto.UserDTO;
 import com.lucas.curso_udemy.exception.ObjectNotFoundException;
 import com.lucas.curso_udemy.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -24,4 +25,11 @@ public class UserService {
         );
     }
 
+    public User save(User user) {
+        return userRepository.insert(user);
+    }
+
+    public User fromUserDTO(UserDTO userDTO) {
+        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
+    }
 }
