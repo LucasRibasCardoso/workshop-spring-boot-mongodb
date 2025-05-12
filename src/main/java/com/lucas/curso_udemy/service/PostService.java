@@ -5,6 +5,8 @@ import com.lucas.curso_udemy.exception.ObjectNotFoundException;
 import com.lucas.curso_udemy.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,7 +23,11 @@ public class PostService {
     }
 
     public List<Post> findByTitle(String text){
-        return postRepository.findByTitle(text);
+        return postRepository.searchTitle(text);
     }
 
+    public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+        Date maxDatePlusOneDay = Date.from(maxDate.toInstant().plus(1, ChronoUnit.DAYS));
+        return  postRepository.fullSearch(text, minDate, maxDatePlusOneDay);
+    }
 }
